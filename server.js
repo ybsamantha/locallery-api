@@ -34,4 +34,22 @@ app.get('/', (req, res) => {
   res.send('welcome to locallery where your neighbor is the artist')
 })
 
+app.get('/artists', async (req, res) => {
+  try {
+    res.json(await Artist.find({}))
+  } catch (error) {
+    res.status(400).json(error)
+  }
+})
+
+app.post('/artists', async (req, res) => {
+  try {
+    res.json(await Artist.create(req.body))
+  } catch (error) {
+    res.status(400).json(error)
+  }
+})
+
+
+
 app.listen(PORT, () => console.log(`${PORT}`))
